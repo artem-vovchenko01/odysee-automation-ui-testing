@@ -1,0 +1,3 @@
+node_modules/
+utilities/cred.js
+tests/allure-results/
