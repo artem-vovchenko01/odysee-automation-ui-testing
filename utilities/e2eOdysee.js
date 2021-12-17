@@ -71,8 +71,8 @@ class e2eOdysee {
                 await odyseePage.click('input.wunderbar__input');
                 await odyseePage.type('input.wunderbar__input', searchTerm, { delay: 100 });
                 await odyseePage.keyboard.press('Enter');
-                await odyseePage.waitForSelector('.claim-preview__wrapper', {timeout: 10000})
-                await odyseePage.waitFor(7000)
+                await odyseePage.waitForSelector('.media__thumb', {timeout: 10000})
+                await odyseePage.waitFor(9000)
                 await odyseePage.click('input.wunderbar__input');
                 const inputValue = await odyseePage.$eval('input.wunderbar__input', el => el.value);
                 for (let i = 0; i < inputValue.length; i++) {
