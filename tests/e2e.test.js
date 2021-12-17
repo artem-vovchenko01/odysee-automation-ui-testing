@@ -22,28 +22,26 @@ describe(
                 }
             }, timeout
         );
-        // it("Page shows error when incorrect login data is entered",
-        //     async () => {
-        //         console.log("TEST 1")
-        //         await reporter.description("Test invalid logi attempt")
-        //         await reporter.startStep("Enter wrong phone number and password")
-        //         await loginPage.loginForValidation(userName, '1234')
-        //         await reporter.endStep()
+         it("Page shows error when incorrect login data is entered",
+             async () => {
+                 await reporter.description("Test invalid logi attempt")
+                 await reporter.startStep("Enter wrong phone number and password")
+                 await loginPage.loginForValidation(userName, '1234')
+                 await reporter.endStep()
 
-        //         await reporter.startStep("Check if page shows an error")
-        //         const loginError = await loginPage.getLoginError()
-        //         await reporter.endStep()
+                 await reporter.startStep("Check if page shows an error")
+                 const loginError = await loginPage.getLoginError()
+                 await reporter.endStep()
                 
-        //         expect(loginError).toBeDefined()
-        //         expect(loginError).toBe("Incorrect email and/or password")
-        //         await loginPage.goToLogin(domain)
+                 expect(loginError).toBeDefined()
+                 expect(loginError).toBe("Incorrect email and/or password")
+                 await loginPage.goToLogin(domain)
 
-        //     }, timeout
-        // )
+             }, timeout
+         )
 
         it("Login succeeds with correct credentials",
             async () => {
-                console.log("TEST 2")
                 await reporter.description("Test valid login attempt")
                 await reporter.startStep("Enter correct credentials")
                 mainPage = await loginPage.loginForFurtherTesting(userName, password)
@@ -59,7 +57,6 @@ describe(
 
         it("Logout works", 
             async () => {
-                console.log("TEST 3")
                 expect(await mainPage.logout()).toBe(true)
                 await loginPage.goToLogin(domain)
             }, timeout
@@ -67,7 +64,6 @@ describe(
 
         it('Search works',
             async () => {
-                console.log("TEST 5")
                 await loginPage.loginForFurtherTesting(userName, password)
                 expect(await mainPage.search('linux')).toBe(true)
                 expect(await mainPage.search('Luke Smith')).toBe(true)
@@ -80,6 +76,7 @@ describe(
                 const title = 'the linux experiment'
                 await mainPage.search(title)
                 await mainPage.goToSearchResult(0)
+                await loginPage.wait(2000)
                 if (await mainPage.isVideoLiked()) { await mainPage.unlikeVideo() }
                 expect(await mainPage.isVideoLiked()).toBe(false)
                 expect(await mainPage.likeVideo()).toBe(true)
@@ -89,7 +86,7 @@ describe(
 
         afterAll(
             async () => {
-                await e2eGitHub.endTest()
+                await odysee.endTest()
             }
         );
     }, timeout

@@ -72,7 +72,7 @@ class e2eOdysee {
                 await odyseePage.type('input.wunderbar__input', searchTerm, { delay: 100 });
                 await odyseePage.keyboard.press('Enter');
                 await odyseePage.waitForSelector('.media__thumb', {timeout: 10000})
-                await odyseePage.waitFor(9000)
+                await odyseePage.waitFor(10000)
                 await odyseePage.click('input.wunderbar__input');
                 const inputValue = await odyseePage.$eval('input.wunderbar__input', el => el.value);
                 for (let i = 0; i < inputValue.length; i++) {
@@ -91,6 +91,7 @@ class e2eOdysee {
                 return await odyseePage.evaluate(() => document.querySelector('.icon--FireActive') != null)
             },
             likeVideo: async() => {
+                await odyseePage.waitForSelector('button[title="I like this"]', {visible: true})
                 await odyseePage.click('button[title="I like this"]')
                 try {
                     await odyseePage.waitForSelector('.icon--FireActive', {timeout: 5000})
@@ -98,6 +99,7 @@ class e2eOdysee {
                 return true
             },
             unlikeVideo: async() => {
+                await odyseePage.waitForSelector('button[title="I like this"]', {visible: true})
                 await odyseePage.click('button[title="I like this"]')
                 await odyseePage.waitFor(3000)
             },
